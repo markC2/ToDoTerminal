@@ -4,6 +4,21 @@ TODO_FILE="$HOME/.todo.txt"
 
 
 case "$1" in
+startup)
+RC_FILE="$HOME/.zshrc"
+MARKER="# added by todo"
+if grep -Fq "$MARKER" "$RC_FILE"; then
+ echo "startup already in zshrc"
+else 
+ cat >> "$RC_FILE" << EOF
+
+$MARKER
+echo "heres your todo list today:"
+todo
+EOF
+ echo "Done - open a new terminal to see your list on startup"
+fi 
+;;
    
  add)
     echo "Add tasks ( Crtl + D when done):"
