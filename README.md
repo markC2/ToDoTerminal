@@ -18,7 +18,7 @@ on top of this other keywords available :
 
 - ` done ` followed by a task item number eg 1 clears that item from list 
 
-- 'todo' todo on its own or with 'today' or 'list' displays the current todo list 
+- `todo` todo on its own or with 'today' or 'list' displays the current todo list 
 
-- 'startup' adds instance of todo to profile to add todo list display on terminal startup
+- `startup` adds instance of todo to profile to add todo list display on terminal startup
 
