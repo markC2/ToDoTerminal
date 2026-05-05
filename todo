@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+TODO_FILE="$HOME/.todo.txt"
+
+
+case "$1" in
+   
+ add)
+    echo "Add tasks ( Crtl + D when done):"
+    while read -r line; do
+      [ -n "$line" ] && echo "$line" >> "$TODO_FILE"
+    done 
+     ;;
+today|list)
+    nl "$TODO_FILE"
+    ;;
+
+done)
+ sed -i.bak "${2}d" "$TODO_FILE" && rm "$TODO_FILE.bak"
+ echo "item cleared"
+ echo "list:"
+ todo 
+ ;;
+
+"") 
+    nl "$TODO_FILE"
+    ;;
+
+ *)
+   echo "$@" >> "$TODO_FILE"
+   echo "added: $@"
+   ;;
+
+esac
+
+
