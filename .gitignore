@@ -1,0 +1,14 @@
+# macOS Finder noise
+.DS_Store
+
+# sed backup files (your script creates these temporarily)
+*.bak
+
+# Editor backups and swap files
+*~
+*.swp
+.vscode/
+.idea/
+
+# Local test data — if you ever set TODO_FILE to something inside the repo
+*.txt

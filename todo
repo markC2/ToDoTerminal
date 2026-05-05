@@ -40,6 +40,9 @@ done)
 "") 
     nl "$TODO_FILE"
     ;;
+help)
+ echo "todo <item to add>"
+;;
 
  *)
    echo "$@" >> "$TODO_FILE"
