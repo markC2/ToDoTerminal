@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
 TODO_FILE="$HOME/.todo.txt"
+strike() {
+  local out=""
+  local i
+  for ((i=0; i<${#1}; i++)); do
+    out+="${1:$i:1}̶"
+  done
+  printf '%s' "$out"
+}
+
+doneSound() {
+ local sound="$1"
+ afplay /System/Library/Sounds/"$sound" &
+}
 
 
 case "$1" in
@@ -31,10 +44,22 @@ today|list)
     ;;
 
 done)
+TASK=$(sed -n "${2}p" "$TODO_FILE")
+  if [ -z "$TASK" ]; then
+    echo "No task #$2." >&2; exit 1
+  fi
+
  sed -i.bak "${2}d" "$TODO_FILE" && rm "$TODO_FILE.bak"
- echo "item cleared"
- echo "list:"
- todo 
+ 
+for frame in "⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏"; do
+    printf "\r  %s  %s" "$frame" "$TASK"
+    sleep 0.005
+  done
+
+printf "\r  \033[32m✓  %s\033[0m\n" "$(strike "$TASK")"
+doneSound "Frog.aiff"
+REMAINING=$(wc -l < "$TODO_FILE" | tr -d ' ')
+printf "  %s left.\n" "$REMAINING"
  ;;
 
 "") 
